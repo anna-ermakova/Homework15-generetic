@@ -29,7 +29,7 @@ public class Main {
         System.out.println(maz.toString());
         System.out.println(mercedes.toString());
         System.out.println(renault.toString());
-        System.out.println();
+
 
 
     }
