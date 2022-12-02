@@ -1,9 +1,9 @@
 public interface Competing {
 
-    String[] pitStop();
+    void getPitStop();
 
-    String[] bestLapTime();
+    void getBestLapTime();
 
-    double[] topSpeed();
+    void getTopSpeed();
 
 }

@@ -1,18 +1,15 @@
 import java.util.Objects;
 
-public class Transport {
+abstract public class Transport {
 
     private String brand;
     private String model;
     private double engineCapacity;
 
-    String startMoving() {
-        return "Начать движение";
-    }
+    abstract void startMoving();
 
-    String finishMoving() {
-        return "Закончить движение";
-    }
+
+    abstract void finishMoving();
 
     public String validateStringParameters(String value) {
         return value == null || value.isBlank() ? "default" : value;
