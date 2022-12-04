@@ -11,18 +11,6 @@ abstract public class Transport {
 
     abstract void finishMoving();
 
-    public String validateStringParameters(String value) {
-        return value == null || value.isBlank() ? "default" : value;
-    }
-
-    public int validateIntParameters(int value) {
-        return value == 0 ? 0 : Math.abs(value);
-    }
-
-    public double validateDoubleParameters(double value) {
-        return value == 0 ? 0 : Math.abs(value);
-    }
-
     public Transport(String brand, String model, double engineCapacity) {
         this.brand = validateStringParameters(brand);
         this.model = validateStringParameters(model);
@@ -32,9 +20,9 @@ abstract public class Transport {
     @Override
     public String toString() {
         return "Transport{" +
-                "brand='" + brand + '\'' +
-                ", model='" + model + '\'' +
-                ", engineCapacity=" + engineCapacity +
+                "brand='" + getBrand() + '\'' +
+                ", model='" + getModel() + '\'' +
+                ", engineCapacity=" + getEngineCapacity() +
                 '}';
     }
 
@@ -61,5 +49,17 @@ abstract public class Transport {
     @Override
     public int hashCode() {
         return Objects.hash(brand, model, engineCapacity);
+    }
+
+    public String validateStringParameters(String value) {
+        return value == null || value.isBlank() ? "default" : value;
+    }
+
+    public int validateIntParameters(int value) {
+        return value == 0 ? 0 : Math.abs(value);
+    }
+
+    public double validateDoubleParameters(double value) {
+        return value == 0 ? 0 : Math.abs(value);
     }
 }

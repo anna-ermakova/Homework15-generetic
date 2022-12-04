@@ -2,6 +2,7 @@ public class PassengerCar extends Transport implements Competing {
     private final double bestLapTime;
     private final double topSpeed;
 
+
     @Override
     void startMoving() {
         System.out.println("Начать движение легкового автомобиля");
@@ -14,10 +15,9 @@ public class PassengerCar extends Transport implements Competing {
 
     public PassengerCar(String brand, String model, double engineCapacity, double bestLapTime, double topSpeed) {
         super(brand, model, engineCapacity);
-        this.bestLapTime = validateDoubleParameters(bestLapTime);
-        this.topSpeed = validateDoubleParameters(topSpeed);
+        this.bestLapTime = bestLapTime;
+        this.topSpeed = topSpeed;
     }
-
 
     @Override
     public void getPitStop() {
@@ -35,5 +35,6 @@ public class PassengerCar extends Transport implements Competing {
     public void getTopSpeed() {
         System.out.println("Максимальная скорость- " + topSpeed);
     }
+
 }
 

@@ -17,8 +17,8 @@ public class Truck extends Transport implements Competing {
         super(brand, model, engineCapacity);
         this.bestLapTime = validateDoubleParameters(bestLapTime);
         this.topSpeed = validateDoubleParameters(topSpeed);
-    }
 
+    }
 
     @Override
     public void getPitStop() {

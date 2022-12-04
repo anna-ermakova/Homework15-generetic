@@ -2,6 +2,7 @@ public class Bus extends Transport implements Competing {
     private final double bestLapTime;
     private final double topSpeed;
 
+
     @Override
     void startMoving() {
         System.out.println("Начать движение автобуса");
