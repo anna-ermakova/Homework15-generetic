@@ -11,6 +11,7 @@ abstract public class Transport {
 
     abstract void finishMoving();
 
+    abstract void printType();
     public Transport(String brand, String model, double engineCapacity) {
         this.brand = validateStringParameters(brand);
         this.model = validateStringParameters(model);

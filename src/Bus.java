@@ -1,7 +1,11 @@
 public class Bus extends Transport implements Competing {
     private final double bestLapTime;
     private final double topSpeed;
+    private final Capasity capasity;
 
+    public Capasity getCapasity() {
+        return capasity;
+    }
 
     @Override
     void startMoving() {
@@ -13,10 +17,20 @@ public class Bus extends Transport implements Competing {
         System.out.println("Законить движение автобуса");
     }
 
-    public Bus(String brand, String model, double engineCapacity, double bestLapTime, double topSpeed) {
+    @Override
+    void printType() {
+        if (capasity == null) {
+            System.out.println("Данных по авто недостаточно");
+        } else {
+            System.out.println("ok");
+        }
+    }
+
+    public Bus(String brand, String model, double engineCapacity, double bestLapTime, double topSpeed, Capasity capasity) {
         super(brand, model, engineCapacity);
         this.bestLapTime = validateDoubleParameters(bestLapTime);
         this.topSpeed = validateDoubleParameters(topSpeed);
+        this.capasity=capasity;
     }
 
 

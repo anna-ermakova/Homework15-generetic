@@ -1,7 +1,11 @@
 public class PassengerCar extends Transport implements Competing {
     private final double bestLapTime;
     private final double topSpeed;
+    private final TypeOfBody typeOfBody;
 
+    public TypeOfBody getTypeOfBody() {
+        return typeOfBody;
+    }
 
     @Override
     void startMoving() {
@@ -13,10 +17,20 @@ public class PassengerCar extends Transport implements Competing {
         System.out.println("Закончить движение легкового автомобиля");
     }
 
-    public PassengerCar(String brand, String model, double engineCapacity, double bestLapTime, double topSpeed) {
+    @Override
+    void printType() {
+        if (typeOfBody == null) {
+            System.out.println("Данных по авто недостаточно");
+        } else {
+            System.out.println("Тип авто- "+typeOfBody);
+        }
+    }
+
+    public PassengerCar(String brand, String model, double engineCapacity, double bestLapTime, double topSpeed, TypeOfBody typeOfBody) {
         super(brand, model, engineCapacity);
         this.bestLapTime = bestLapTime;
         this.topSpeed = topSpeed;
+        this.typeOfBody=typeOfBody;
     }
 
     @Override
