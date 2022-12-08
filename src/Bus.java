@@ -1,9 +1,9 @@
 public class Bus extends Transport implements Competing {
     private final double bestLapTime;
     private final double topSpeed;
-    private final Capasity capasity;
+    private final Capacity capasity;
 
-    public Capasity getCapasity() {
+    public Capacity getCapasity() {
         return capasity;
     }
 
@@ -18,6 +18,12 @@ public class Bus extends Transport implements Competing {
     }
 
     @Override
+    public boolean isDiagnosticsPassed() {
+        System.out.println("Автобусы не могут проходить диагностику");
+        return false;
+    }
+
+    @Override
     void printType() {
         if (capasity == null) {
             System.out.println("Данных по авто недостаточно");
@@ -26,11 +32,11 @@ public class Bus extends Transport implements Competing {
         }
     }
 
-    public Bus(String brand, String model, double engineCapacity, double bestLapTime, double topSpeed, Capasity capasity) {
+    public Bus(String brand, String model, double engineCapacity, double bestLapTime, double topSpeed, Capacity capasity) {
         super(brand, model, engineCapacity);
         this.bestLapTime = validateDoubleParameters(bestLapTime);
         this.topSpeed = validateDoubleParameters(topSpeed);
-        this.capasity=capasity;
+        this.capasity = capasity;
     }
 
 

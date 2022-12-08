@@ -4,6 +4,7 @@ public class Truck extends Transport implements Competing {
     private final double topSpeed;
     private Weight weight;
 
+
     public Weight getWeight() {
         return weight;
     }
@@ -19,12 +20,17 @@ public class Truck extends Transport implements Competing {
     }
 
     @Override
+    public boolean isDiagnosticsPassed() {
+        return this.passDiagnostics;
+    }
+
+    @Override
     void printType() {
 
     }
 
 
-    public Truck(String brand, String model, double engineCapacity, double bestLapTime, double topSpeed, Weight weight ) {
+    public Truck(String brand, String model, double engineCapacity, double bestLapTime, double topSpeed, Weight weight) {
         super(brand, model, engineCapacity);
         this.bestLapTime = validateDoubleParameters(bestLapTime);
         this.topSpeed = validateDoubleParameters(topSpeed);

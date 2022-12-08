@@ -2,6 +2,7 @@ import java.util.Objects;
 
 abstract public class Transport {
 
+    protected boolean passDiagnostics;
     private String brand;
     private String model;
     private double engineCapacity;
@@ -11,7 +12,31 @@ abstract public class Transport {
 
     abstract void finishMoving();
 
+    public static void checkTransport(Transport... transports) {
+        int count = 0;
+        for (Transport transport : transports) {
+            if (!transport.isDiagnosticsPassed()) {
+                try {
+                    throw new RuntimeException(transport.getBrand() + " " + transport.getModel() + " не прошел диагностику");
+                } catch (RuntimeException e) {
+                    System.out.println(e.getMessage());
+                }
+            } else {
+                count++;
+            }
+        }
+        System.out.println("Диагностику прошли " + count + " из " + transports.length + " автомобилей.");
+    }
+
+
+    public Boolean getPassDiagnostics() {
+        return passDiagnostics;
+    }
+
+    public abstract boolean isDiagnosticsPassed();
+
     abstract void printType();
+
     public Transport(String brand, String model, double engineCapacity) {
         this.brand = validateStringParameters(brand);
         this.model = validateStringParameters(model);
