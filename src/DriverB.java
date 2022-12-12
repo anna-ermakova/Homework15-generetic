@@ -1,6 +1,6 @@
 public class DriverB<T extends PassengerCar> extends Driver {
-    public DriverB(String name, boolean validDriverLicense, int drivingExperience) {
-        super(name, validDriverLicense, drivingExperience);
+    public DriverB(String name) {
+        super(name);
     }
 
     @Override

@@ -3,6 +3,7 @@ public class Truck extends Transport implements Competing {
     private final double bestLapTime;
     private final double topSpeed;
     private Weight weight;
+    private DriverC driver;
 
 
     public Weight getWeight() {
@@ -25,24 +26,34 @@ public class Truck extends Transport implements Competing {
     }
 
     @Override
+    public boolean repair() {
+        return false;
+    }
+
+    @Override
     void printType() {
 
     }
 
 
-    public Truck(String brand, String model, double engineCapacity, double bestLapTime, double topSpeed, Weight weight) {
+    public Truck(String brand, String model, double engineCapacity, double bestLapTime, double topSpeed, Weight weight, DriverC driver) {
         super(brand, model, engineCapacity);
         this.bestLapTime = validateDoubleParameters(bestLapTime);
         this.topSpeed = validateDoubleParameters(topSpeed);
         this.weight = weight;
-
     }
-
+    public String toString() {
+        return "Грузовик с водителем "+driver+"\n"+super.toString();
+    }
     @Override
     public void getPitStop() {
         System.out.println("Грузовой автомобиль сообщил о пит-стопе.");
         System.out.println("Грузовой автомобиль принимает манипуляции на пит-стопе.");
         System.out.println("Грузовой автомобиль вернулся на трассу.");
+    }
+
+    public void setDriver(DriverC driver) {
+        this.driver = driver;
     }
 
     @Override

@@ -1,15 +1,72 @@
 public class Bus extends Transport implements Competing {
+    public enum SeatCapacity {
+        EXTRA_SMALL(0, 10), SMALL(11, 40), MEDIUM(41, 60), BIG(61, 80), EXTRA_BIG(81, 120);
+
+        SeatCapacity() {
+        }
+
+        int min;
+        int max;
+
+        SeatCapacity(int min, int max) {
+            this.min = min;
+            this.max = max;
+        }
+
+        public static SeatCapacity getValue(int value) {
+            for (SeatCapacity e : SeatCapacity.values()) {
+                if (value >= e.getMin() && value <= e.getMax()) {
+                    System.out.println(e);
+                    return e;
+                }
+            }
+            return null;
+        }
+
+        public double getMin() {
+            return min;
+        }
+
+        public double getMax() {
+            return max;
+        }
+    }
+
     private final double bestLapTime;
     private final double topSpeed;
-    private final Capacity capasity;
+    private final SeatCapacity capacity;
+    private DriverD driver;
 
-    public Capacity getCapasity() {
-        return capasity;
+    static class DriverD extends Driver{
+        public DriverD(String name) {
+            super(name);
+        }
+
+        public String getBusMessage() {
+            return "водитель " + getName() + " управляет автобусом " + bus.getBrand() + " " + bus.getModel() +
+                    " и будет участвовать в заезде.";
+        }
+
+        @Override
+        String startMoving() {
+            return null;
+        }
+
+        @Override
+        String finishMoving() {
+            return null;
+        }
+
+        @Override
+        String refuelCar() {
+            return null;
+        }
     }
+
 
     @Override
     void startMoving() {
-        System.out.println("Начать движение автобуса");
+        System.out.println("Автобус "+getBrand()+" начал движение.");
     }
 
     @Override
@@ -24,27 +81,44 @@ public class Bus extends Transport implements Competing {
     }
 
     @Override
+    public boolean repair() {
+        return false;
+    }
+
+    @Override
     void printType() {
-        if (capasity == null) {
+        if (capacity == null) {
             System.out.println("Данных по авто недостаточно");
         } else {
             System.out.println("ok");
         }
     }
 
-    public Bus(String brand, String model, double engineCapacity, double bestLapTime, double topSpeed, Capacity capasity) {
+    public Bus(String brand, String model, double engineCapacity, double bestLapTime, double topSpeed, SeatCapacity capacity, DriverD driver, Mechanic mechanic, Sponsor sponsor) {
         super(brand, model, engineCapacity);
         this.bestLapTime = validateDoubleParameters(bestLapTime);
         this.topSpeed = validateDoubleParameters(topSpeed);
-        this.capasity = capasity;
+        this.capacity = capacity;
+        this.driver = driver;
+        this.getMechanics();
+        this.getSponsors();
+
     }
 
+    @Override
+    public String toString() {
+        return "Автобус с водителем " + driver + "\n" + super.toString();
+    }
 
     @Override
     public void getPitStop() {
         System.out.println("Автобус сообщил о пит-стопе.");
         System.out.println("Автобус принимает манипуляции на пит-стопе.");
         System.out.println("Автобус вернулся на трассу.");
+    }
+
+    public void setDriver(DriverD driver) {
+        this.driver = driver;
     }
 
     @Override

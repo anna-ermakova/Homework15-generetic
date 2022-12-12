@@ -1,6 +1,6 @@
 public class DriverD<T extends Bus> extends Driver {
-    public DriverD(String name, boolean validDriverLicense, int drivingExperience) {
-        super(name, validDriverLicense, drivingExperience);
+    public DriverD(String name) {
+        super(name);
     }
 
     public String getCarMessage(T bus) {

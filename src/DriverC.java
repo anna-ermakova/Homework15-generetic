@@ -1,6 +1,6 @@
 public class DriverC<T extends Truck> extends Driver {
-    public DriverC(String name, boolean validDriverLicense, int drivingExperience) {
-        super(name, validDriverLicense, drivingExperience);
+    public DriverC(String name) {
+        super(name);
     }
 
     public String getPCarMessage(T truck) {

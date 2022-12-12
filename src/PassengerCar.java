@@ -2,6 +2,7 @@ public class PassengerCar extends Transport implements Competing {
     private final double bestLapTime;
     private final double topSpeed;
     private final TypeOfBody typeOfBody;
+    private DriverB driver;
 
     public TypeOfBody getTypeOfBody() {
         return typeOfBody;
@@ -22,6 +23,13 @@ public class PassengerCar extends Transport implements Competing {
         return this.passDiagnostics;
     }
 
+    @Override
+    public boolean repair() {
+        return false;
+    }
+    public String toString() {
+        return "Автомобиль с водителем "+driver+"\n"+super.toString();
+    }
 
     @Override
     void printType() {
@@ -44,6 +52,10 @@ public class PassengerCar extends Transport implements Competing {
         System.out.println("Легковой автомобиль сообщил о пит-стопе.");
         System.out.println("Легковой автомобиль принимает манипуляции на пит-стопе.");
         System.out.println("Легковой автомобиль вернулся на трассу.");
+    }
+
+    public void setDriver(DriverB driver) {
+        this.driver = driver;
     }
 
     @Override

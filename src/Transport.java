@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 abstract public class Transport {
@@ -6,6 +8,9 @@ abstract public class Transport {
     private String brand;
     private String model;
     private double engineCapacity;
+    private final List<Sponsor[]> sponsors;
+    private final List<Mechanic<?>[]> mechanics;
+
 
     abstract void startMoving();
 
@@ -35,21 +40,29 @@ abstract public class Transport {
 
     public abstract boolean isDiagnosticsPassed();
 
+    public abstract boolean repair();
+
     abstract void printType();
 
     public Transport(String brand, String model, double engineCapacity) {
         this.brand = validateStringParameters(brand);
         this.model = validateStringParameters(model);
         this.engineCapacity = validateDoubleParameters(engineCapacity);
+        this.sponsors = new ArrayList<Sponsor[]>();
+        this.mechanics = new ArrayList<Mechanic<?>[]>();
+
     }
 
-    @Override
-    public String toString() {
-        return "Transport{" +
-                "brand='" + getBrand() + '\'' +
-                ", model='" + getModel() + '\'' +
-                ", engineCapacity=" + getEngineCapacity() +
-                '}';
+    public List<Sponsor[]> getSponsors() {
+        return sponsors;
+    }
+
+    public void addSponsor(Sponsor... sponsor) {
+        sponsors.add(sponsor);
+    }
+
+    public void addMechanic(Mechanic<?>... mechanic) {
+        mechanics.add(mechanic);
     }
 
     public String getBrand() {
@@ -64,28 +77,57 @@ abstract public class Transport {
         return engineCapacity;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Transport transport = (Transport) o;
-        return Double.compare(transport.engineCapacity, engineCapacity) == 0 && Objects.equals(brand, transport.brand) && Objects.equals(model, transport.model);
+    public List<Mechanic<?>[]> getMechanics() {
+        return mechanics;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(brand, model, engineCapacity);
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        if (!sponsors.isEmpty()) {
+            result.append("Спонсоры: ");
+        }
+        for (int i = 0; i < sponsors.size(); i++) {
+            result.append(sponsors.get(i));
+            if (i != sponsors.size() - 1) {
+                result.append(", ");
+            }
+        }
+        result.append("\n");
+        if (!mechanics.isEmpty()) {
+            result.append("Механики: ");
+        }
+        for (int i = 0; i < mechanics.size(); i++) {
+            result.append(mechanics.get(i));
+            if (i != mechanics.size() - 1) {
+                result.append(", ");
+            }
+        }
+        return result.toString();
     }
 
-    public String validateStringParameters(String value) {
-        return value == null || value.isBlank() ? "default" : value;
-    }
+        @Override
+        public boolean equals (Object o){
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Transport transport = (Transport) o;
+            return Double.compare(transport.engineCapacity, engineCapacity) == 0 && Objects.equals(brand, transport.brand) && Objects.equals(model, transport.model);
+        }
 
-    public int validateIntParameters(int value) {
-        return value == 0 ? 0 : Math.abs(value);
-    }
+        @Override
+        public int hashCode () {
+            return Objects.hash(brand, model, engineCapacity);
+        }
 
-    public double validateDoubleParameters(double value) {
-        return value == 0 ? 0 : Math.abs(value);
+        public String validateStringParameters (String value){
+            return value == null || value.isBlank() ? "default" : value;
+        }
+
+        public int validateIntParameters ( int value){
+            return value == 0 ? 0 : Math.abs(value);
+        }
+
+        public double validateDoubleParameters ( double value){
+            return value == 0 ? 0 : Math.abs(value);
+        }
     }
-}
